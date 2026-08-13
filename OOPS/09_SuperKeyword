@@ -1,0 +1,92 @@
+import java.util.ArrayList;
+class Book {
+    private String title;
+    private boolean borrowed;
+    Book(String title) {
+        this.title = title;
+        borrowed = false;
+    }
+    String getTitle() {
+        return title;
+    }
+    boolean isBorrowed() {
+        return borrowed;
+    }
+    void borrow() {
+        borrowed = true;
+    }
+    void returnBook() {
+        borrowed = false;
+    }
+}
+abstract class User {
+    String name;
+    User(String name) {
+        this.name = name;
+    }
+    abstract int getBorrowingLimit();
+}
+class Student extends User {
+    Student(String name) {
+        super(name);
+    }
+    int getBorrowingLimit() {
+        return 2;
+    }
+}
+class Teacher extends User {
+    Teacher(String name) {
+        super(name);
+    }
+    int getBorrowingLimit() {
+        return 5;
+    }
+}
+class Library {
+    ArrayList<Book> books = new ArrayList<>();
+    void addBook(Book book) {
+        books.add(book);
+    }
+    void borrowBook(User user, Book book) {
+        if (book.isBorrowed()) {
+            System.out.println(
+                book.getTitle() + " is already borrowed"
+            );
+        } else {
+            book.borrow();
+            System.out.println(
+                user.name + " borrowed " +
+                book.getTitle()
+            );
+        }
+    }
+    void returnBook(Book book) {
+        book.returnBook();
+        System.out.println(
+            book.getTitle() + " returned"
+        );
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Library library = new Library();
+        Book b1 = new Book("Java Programming");
+        Book b2 = new Book("OOP Concepts");
+        library.addBook(b1);
+        library.addBook(b2);
+        Student student = new Student("Pavitra");
+        Teacher teacher = new Teacher("Ravi");
+        System.out.println(
+            "Student limit: " +
+            student.getBorrowingLimit()
+        );
+        System.out.println(
+            "Teacher limit: " +
+            teacher.getBorrowingLimit()
+        );
+        library.borrowBook(student, b1);
+        library.borrowBook(teacher, b1);
+        library.returnBook(b1);
+        library.borrowBook(teacher, b1);
+    }
+}

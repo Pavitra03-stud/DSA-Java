@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+class User {
+    private String name;
+    User(String name) {
+        this.name = name;
+    }
+    String getName() {
+        return name;
+    }
+}
+class Customer extends User {
+    Customer(String name) {
+        super(name);
+    }
+}
+class DeliveryPartner extends User {
+    DeliveryPartner(String name) {
+        super(name);
+    }
+}
+class Restaurant {
+    String name;
+    Restaurant(String name) {
+        this.name = name;
+    }
+}
+class Food {
+    String name;
+    double price;
+    Food(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+}
+class Order {
+    ArrayList<Food> foods = new ArrayList<>();
+    void addFood(Food food) {
+        foods.add(food);
+    }
+    double calculateTotal() {
+        double total = 0;
+        for (Food food : foods) {
+            total += food.price;
+        }
+        return total;
+    }
+}
+interface Payment {
+    void pay(double amount);
+}
+class UPIPayment implements Payment {
+
+    public void pay(double amount) {
+        System.out.println("Paid ₹" + amount + " using UPI");
+    }
+}
+class CashPayment implements Payment {
+
+    public void pay(double amount) {
+        System.out.println("Paid ₹" + amount + " using Cash");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Customer customer = new Customer("Pavitra");
+        Restaurant restaurant =
+                new Restaurant("Food Corner");
+        Food f1 = new Food("Pizza", 250);
+        Food f2 = new Food("Burger", 150);
+        Food f3 = new Food("Juice", 80);
+        Order order = new Order();
+        order.addFood(f1);
+        order.addFood(f2);
+        order.addFood(f3);
+        double total = order.calculateTotal();
+        System.out.println("Customer: " + customer.getName());
+        System.out.println("Restaurant: " + restaurant.name);
+        System.out.println("Total: ₹" + total);
+        Payment payment = new UPIPayment();
+        payment.pay(total);
+    }
+}

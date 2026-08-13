@@ -1,0 +1,44 @@
+import java.util.*;
+class BankAccount{
+    private String accHolder;
+    private int accNumber;
+    private int balance;
+    
+    BankAccount(String accHolder,int accNumber,int balance){
+        this.accHolder = accHolder;
+        this.accNumber = accNumber;
+        this.balance=balance;
+    }
+    void deposit(int amount){
+        if(amount>0){
+            balance+=amount;
+            System.out.println("Deposited: "+balance);
+        }else{
+            System.out.println("Invalid");
+        }
+    }
+    void withdraw(int amount){
+        if(amount<0){
+            System.out.println("Invalid");
+        }else if(amount>balance){
+            System.out.println("Insufficient");
+        }else{
+            balance-=amount;
+            System.out.println("Withdrawn: "+balance);
+        }
+    }
+    void display(){
+        System.out.println("Accholder: "+accHolder);
+        System.out.println("Accnumber: "+accNumber);
+        System.out.println("Balance: "+balance);
+    }
+}
+public class Abstraction{
+    public static void main(String[] args){
+        //Scanner sc = new Scanner(System.in);
+        BankAccount account = new BankAccount("Pavitra",101,10000);
+        account.display();
+        account.deposit(100);
+        account.withdraw(2000);
+    }
+}

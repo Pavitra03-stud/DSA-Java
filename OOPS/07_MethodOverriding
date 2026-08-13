@@ -1,0 +1,36 @@
+abstract class Notification{
+   abstract void send(String message);
+}
+class EmailNotification extends Notification{
+    public void send(String message){
+        System.out.println(message+" Sent using Email");
+    }
+}
+class SMSNotification extends Notification{
+    public void send(String message){
+        System.out.println(message+" Sent using SMS");
+    }
+}
+class WNotification extends Notification{
+    public void send(String message){
+        System.out.println(message+" Sent using Whatsapp");
+    }
+}
+class PushNotification extends Notification{
+    public void send(String message){
+        System.out.println(message+" Sent using Push");
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Notification n1 = new EmailNotification();
+        Notification n2 = new SMSNotification();
+        Notification n3 = new WNotification();
+        Notification n4 = new PushNotification();
+        n1.send("Hello");
+        n2.send("Hi");
+        n3.send("Bye");
+        n4.send("OK");
+        
+    }
+}

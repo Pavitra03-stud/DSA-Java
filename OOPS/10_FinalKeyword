@@ -1,0 +1,110 @@
+import java.util.ArrayList;
+class Product {
+    private String name;
+    private double price;
+    Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+    String getName() {
+        return name;
+    }
+    double getPrice() {
+        return price;
+    }
+    void changePrice(double newPrice) {
+        if (newPrice > 0) {
+            price = newPrice;
+        }
+    }
+}
+class User {
+    protected String name;
+    User(String name) {
+        this.name = name;
+    }
+}
+class Customer extends User {
+    Customer(String name) {
+        super(name);
+    }
+    void placeOrder() {
+        System.out.println(name + " placed an order");
+    }
+}
+class Admin extends User {
+    Admin(String name) {
+        super(name);
+    }
+    void updatePrice(Product product, double price) {
+        product.changePrice(price);
+    }
+}
+interface Payment {
+    void pay(double amount);
+}
+class CreditCardPayment implements Payment {
+    public void pay(double amount) {
+        System.out.println(
+            "Paid ₹" + amount +
+            " using Credit Card"
+        );
+    }
+}
+class UPIPayment implements Payment {
+    public void pay(double amount) {
+        System.out.println(
+            "Paid ₹" + amount +
+            " using UPI"
+        );
+    }
+}
+class Order {
+    ArrayList<Product> products = new ArrayList<>();
+    void addProduct(Product product) {
+        products.add(product);
+    }
+    double calculateTotal() {
+        double total = 0;
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+        return total;
+    }
+    double applyDiscount(double total, double discount) {
+        return total - (total * discount / 100);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Customer customer =
+                new Customer("Pavitra");
+        Admin admin =
+                new Admin("Admin");
+        Product p1 =
+                new Product("Laptop", 50000);
+        Product p2 =
+                new Product("Mouse", 1000);
+        Product p3 =
+                new Product("Keyboard", 2000);
+        admin.updatePrice(p2, 800);
+        Order order = new Order();
+        order.addProduct(p1);
+        order.addProduct(p2);
+        order.addProduct(p3);
+        double total = order.calculateTotal();
+        System.out.println(
+            "Total: ₹" + total
+        );
+        double finalAmount =
+                order.applyDiscount(total, 10);
+        System.out.println(
+            "After 10% Discount: ₹" +
+            finalAmount
+        );
+        Payment payment =
+                new UPIPayment();
+        payment.pay(finalAmount);
+        customer.placeOrder();
+    }
+}

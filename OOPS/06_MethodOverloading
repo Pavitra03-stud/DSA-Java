@@ -1,0 +1,66 @@
+abstract class Shape{
+    abstract double area();
+    abstract double perimeter();
+}
+class Circle extends Shape{
+    double radius;
+    Circle(double radius){
+        this.radius = radius;
+    }
+    double area(){
+        return Math.PI*radius*radius;
+    }
+    double perimeter(){
+        return 2*Math.PI*radius;
+    }
+}
+class Rectangle extends Shape{
+    double l;
+    double w;
+    Rectangle(double l,double w){
+        this.l = l;
+        this.w = w;
+    }
+    double area(){
+        return l*w;
+    }
+    double perimeter(){
+        return 2*(l+w);
+    }
+}
+class Triangle extends Shape{
+    double a;
+    double b;
+    double c;
+    Triangle(double a,double b,double c){
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+    double area(){
+        double s = (a+b+c)/2;
+        return Math.sqrt(s*(s-a)*(s-b)*(s-c));
+    }
+    double perimeter(){
+        return a+b+c;
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Shape c = new Circle(2);
+        Shape r = new Rectangle(10,5);
+        Shape t = new Triangle(1,2,3);
+        //System.out.println("Circle: ");
+        System.out.println("Circle Area: "+c.area());
+        System.out.println("Circle Perimeter: "+c.perimeter());
+        
+       // System.out.println("Rectangle: ");
+        System.out.println("Rectangle Area: "+r.area());
+        System.out.println("Rectangle Perimeter: "+r.perimeter());
+        
+       // System.out.println("Triangle:");
+        System.out.println("Triangle area:"+t.area());
+        System.out.println("Triangle perimeter:"+t.perimeter());
+        
+    }
+}

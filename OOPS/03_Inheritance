@@ -1,0 +1,62 @@
+class Vehicle{
+    String brand;
+    int speed;
+    int fuel;
+    Vehicle(String brand,int speed,int fuel){
+        this.brand=brand;
+        this.speed=speed;
+        this.fuel=fuel;
+    }
+    void display(){
+        System.out.println("Brand: "+brand);
+        System.out.println("Speed: "+speed+" km/s");
+        System.out.println("Fuel: "+fuel+" litres");
+    }
+}
+class Car extends Vehicle{
+    int numberOfDoors;
+    Car(String brand,int speed,int fuel,int numberOfDoors){
+        super(brand,speed,fuel);
+        this.numberOfDoors=numberOfDoors;
+    }
+    void displayCar(){
+    display();
+        System.out.println("Number of Doors: "+numberOfDoors);
+    }
+}
+class Bike extends Vehicle{
+    boolean hasGear;
+    Bike(String brand,int speed,int fuel,boolean hasGear){
+        super(brand,speed,fuel);
+        this.hasGear=hasGear;
+    }
+    void displayBike(){
+    display();
+        System.out.println("Gear: "+hasGear);
+    }
+}
+class Truck extends Vehicle{
+    int loadCapacity;
+    Truck(String brand,int speed,int fuel,int loadCapacity){
+        super(brand,speed,fuel);
+        this.loadCapacity=loadCapacity;
+    }
+    void displayTruck(){
+    display();
+        System.out.println("Load Capacity "+loadCapacity);
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        //Vehicle v = new Vehicle();
+        Car c = new Car("BMW",20,10,4);
+        Bike b = new Bike("Honda",30,7,true);
+        Truck t = new Truck("JCP",40,8,15);
+        System.out.println("CAR: ");
+        c.displayCar();
+        System.out.println("BIKE: ");
+        b.displayBike();
+        System.out.println("TRUCK: ");
+        t.displayTruck();
+        }
+}

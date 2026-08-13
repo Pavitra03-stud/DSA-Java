@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+class Employee{
+    String name;
+    int salary;
+    Employee(String name,int salary){
+        this.name = name;
+        this.salary = salary;
+    }
+    int calculateSalary(){
+        return salary;
+    }
+}
+class Developer extends Employee{
+    int codingBonus;
+    Developer(String name,int salary,int codingBonus){
+        super(name,salary);
+        this.codingBonus=codingBonus;
+    }
+    int calculateSalary(){
+        return salary+codingBonus;
+    }
+}
+class Designer extends Employee{
+    int designBonus;
+    Designer(String name,int salary,int designBonus){
+        super(name,salary);
+        this.designBonus=designBonus;
+    }
+    int calculateSalary(){
+        return salary+designBonus;
+    }
+}
+class Manager extends Employee{
+    int manageBonus;
+   Manager(String name,int salary,int manageBonus){
+        super(name,salary);
+        this.manageBonus=manageBonus;
+    }
+    int calculateSalary(){
+        return salary+manageBonus;
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        ArrayList<Employee> employees = new ArrayList<>();
+        employees.add(new Developer("Arun",40000,10000));
+        employees.add(new Designer("Ravi",50000,15000));
+        employees.add(new Manager("Kavin",70000,30000));
+        for(int i=0;i<employees.size();i++){
+            Employee e = employees.get(i);
+            System.out.println(e.name+" Salary: "+e.calculateSalary());
+        }
+    }
+}
